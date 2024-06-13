@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app-of-apps
+  name: my-app-of-apps-2
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/mrjesma/my-argocd.git
     targetRevision: HEAD
-    path: my-app-of-apps/env/staging
+    path: my-app-of-apps/second-app
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
@@ -24,4 +24,5 @@ spec:
       - CreateNamespace=false
       - PrunePropagationPolicy=foreground
       - PruneLast=true
+
 
