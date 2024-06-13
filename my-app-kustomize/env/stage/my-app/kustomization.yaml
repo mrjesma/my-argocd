@@ -1,0 +1,7 @@
+---
+namespace: staging
+images:
+  - name: airtonorlandini/nginx
+    newTag: v1.1.0
+resources:
+  - ../../../my-app-base
