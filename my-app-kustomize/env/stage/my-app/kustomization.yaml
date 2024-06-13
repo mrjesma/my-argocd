@@ -2,6 +2,6 @@
 namespace: staging
 images:
   - name: airtonorlandini/nginx
-    newTag: v1.0.0
+    newTag: v1.2.0
 resources:
   - ../../../my-app-base
