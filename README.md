@@ -16,6 +16,11 @@ terraform init
 terraform apply
 ```
 
+To forward argocd port to localhost run:
+```sh
+kubectl port-forward svc/argocd-server -n argocd 8080:80
+```
+
 ## Deploy apps via argocd
 Argocd application manifests are located in `argocd-applications` folder.
 
@@ -23,6 +28,7 @@ Argocd application manifests are located in `argocd-applications` folder.
 * `'2-application.yaml` App of apps strategy, where 1 argocd manifest deploy other 2 argocd manifest which deploy its apps.
 * `'3-application.yaml` Deploy app with Kustomise
 * `'4-application.yaml` Deploy app with Helm
+* `'5-application.yaml` Deploy app with Kustomise and image version tag updated automatically with argo-image-updater
 
 To deploy/delete app in argocd run
 ```sh
