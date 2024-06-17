@@ -40,6 +40,7 @@ Argocd application manifests are located in `argocd-applications` folder.
 * `'3-application.yaml` Deploy app with Kustomise
 * `'4-application.yaml` Deploy app with Helm
 * `'5-application.yaml` Deploy app with Kustomise and image version tag updated automatically with argo-image-updater
+* `'6-application.yaml` Deploy app with Kustomise and image version tag updated automatically with argo-image-updater using git write-back method
 
 To deploy/delete app in argocd run
 ```sh
