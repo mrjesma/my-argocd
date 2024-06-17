@@ -16,9 +16,20 @@ terraform init
 terraform apply
 ```
 
-To forward argocd port to localhost run:
+## Access argocd
+Check if all pods are running
+```sh
+kubectl get pods -n argocd
+```
+
+Forward http port
 ```sh
 kubectl port-forward svc/argocd-server -n argocd 8080:80
+```
+
+Get argocd initial admin password
+```sh
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
 ## Deploy apps via argocd
@@ -57,5 +68,31 @@ mv *.tgz packages
 ```
 Edit Chart.yaml version tag to generate new versions. 
 
+### Argocd cli
+Download and install argocd cli
+```sh
+VERSION=$(curl -L -s https://raw.githubusercontent.com/argoproj/argo-cd/stable/VERSION)
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/download/v$VERSION/argocd-linux-amd64
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm argocd-linux-amd64
+```
 
+Login argocd
+```sh
+argocd login localhost:8080 \
+  --insecure \
+  --username admin \
+  --password $(kubectl get secret \
+  -n argocd \
+  argocd-initial-admin-secret \
+  -o jsonpath="{.data.password}" |
+  base64 -d)
+```
 
+Download and install argocd-image-updater cli
+```sh
+VERSION=$(curl -L -s https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/VERSION)
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj-labs/argocd-image-updater/releases/download/v$VERSION/argocd-image-updater-linux_amd64 
+sudo install -m 555 argocd-image-updater-linux_amd64 /usr/local/bin/argocd-image-updater
+rm argocd-image-updater-linux_amd64
+```
