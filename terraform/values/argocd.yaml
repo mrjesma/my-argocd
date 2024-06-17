@@ -1,5 +1,5 @@
 ---
-server:
-  extraArgs:
-    - --insecure
+#server:
+#  extraArgs:
+#    - --insecure
 
