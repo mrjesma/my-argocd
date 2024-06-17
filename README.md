@@ -97,3 +97,8 @@ curl -sSL -o argocd-linux-amd64 https://github.com/argoproj-labs/argocd-image-up
 sudo install -m 555 argocd-image-updater-linux_amd64 /usr/local/bin/argocd-image-updater
 rm argocd-image-updater-linux_amd64
 ```
+
+Check argocd-image-updater log
+```sh
+kubectl logs -f -l app.kubernetes.io/instance=argocd-image-updater -n argocd
+```
