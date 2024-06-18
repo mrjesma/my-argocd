@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - airtonorlandini/nginx:v2.1.0
